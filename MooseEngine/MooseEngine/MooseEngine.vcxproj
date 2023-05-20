@@ -22,7 +22,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{dd2bd588-c28a-4559-bc8f-72b80121e878}</ProjectGuid>
+    <ProjectGuid>{06255056-e9f5-477f-9cf8-ced1a315058a}</ProjectGuid>
     <RootNamespace>MooseEngine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
