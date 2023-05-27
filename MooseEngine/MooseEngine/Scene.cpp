@@ -12,6 +12,12 @@ Scene::Scene(GraphicsDevice_DX* const graphicsInstance):
 
 Scene::~Scene()
 {
+    if (g_pConstantBuffer) g_pConstantBuffer->Release();
+    if (g_pVertexBuffer) g_pVertexBuffer->Release();
+    if (g_pIndexBuffer) g_pIndexBuffer->Release();
+    if (g_pVertexLayout) g_pVertexLayout->Release();
+    if (g_pVertexShader) g_pVertexShader->Release();
+    if (g_pPixelShader) g_pPixelShader->Release();
 }
 
 HRESULT Scene::LoadScene(HWND const g_hWnd)

@@ -9,6 +9,7 @@ g_featureLevel(D3D_FEATURE_LEVEL_11_0), g_pd3dDevice1(nullptr), g_pImmediateCont
 GraphicsDevice_DX::~GraphicsDevice_DX()
 {
 	if (g_pd3dDevice)g_pd3dDevice->Release();
+	if (g_pImmediateContext) g_pImmediateContext->ClearState();
 	if (g_pImmediateContext)g_pImmediateContext->Release();
 	if (g_pSwapChain)g_pSwapChain->Release();
 	if (g_pRenderTargetView)g_pRenderTargetView->Release();
