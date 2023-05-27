@@ -166,10 +166,6 @@ HRESULT Scene::LoadScene(HWND const g_hWnd)
 
 void Scene::UpdateScene()
 {
-}
-
-void Scene::RenderScene()
-{
     // Update our time
     static float t = 0.0f;
     if (gm->getDriverType() == D3D_DRIVER_TYPE_REFERENCE)
@@ -189,7 +185,10 @@ void Scene::RenderScene()
     // Animate the cube
     //
     g_World = XMMatrixRotationY(t);
+}
 
+void Scene::RenderScene()
+{
     //
     // Clear the back buffer
     //
@@ -216,6 +215,11 @@ void Scene::RenderScene()
     // Present our back buffer to our front buffer
     //
     gm->getSwapChain()->Present(0, 0);
+}
+
+void Scene::OnKeyPress()
+{
+    int lols;
 }
 
 HRESULT Scene::CompileShaderFromFile(const WCHAR* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut)

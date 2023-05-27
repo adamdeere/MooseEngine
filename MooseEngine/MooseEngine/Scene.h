@@ -27,6 +27,7 @@ public:
 	HRESULT LoadScene(HWND const g_hWnd);
 	void UpdateScene();
 	void RenderScene();
+	static void OnKeyPress();
 private:
 
 	GraphicsDevice_DX* gm;

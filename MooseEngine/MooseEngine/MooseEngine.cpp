@@ -47,11 +47,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	return window.Run();
 }
 
-//
-//  FUNCTION: MyRegisterClass()
-//
-//  PURPOSE: Registers the window class.
-//
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
 	WNDCLASSEXW wcex;
