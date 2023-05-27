@@ -39,6 +39,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	if (FAILED(hr))
 		return FALSE;
 
+	hr = window.InitDevice();
+
+	if (FAILED(hr))
+		return FALSE;
+
 	return window.Run();
 }
 
