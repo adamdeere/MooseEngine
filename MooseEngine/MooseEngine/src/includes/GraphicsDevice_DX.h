@@ -6,7 +6,6 @@
 #include <directxmath.h>
 #include <directxcolors.h>
 
-
 using namespace DirectX;
 
 class GraphicsDevice_DX
@@ -31,15 +30,15 @@ public:
 	D3D_DRIVER_TYPE getDriverType()const;
 
 private:
-	ID3D11Device* g_pd3dDevice;
-	ID3D11DeviceContext* g_pImmediateContext;
-	IDXGISwapChain* g_pSwapChain;
-	ID3D11RenderTargetView* g_pRenderTargetView;
-	ID3D11DepthStencilView* g_pDepthStencilView;
+	ID3D11Device* g_pd3dDevice = nullptr;
+	ID3D11DeviceContext* g_pImmediateContext = nullptr;
+	IDXGISwapChain* g_pSwapChain = nullptr;
+	ID3D11RenderTargetView* g_pRenderTargetView = nullptr;
+	ID3D11DepthStencilView* g_pDepthStencilView = nullptr;
 	D3D_DRIVER_TYPE         g_driverType;
 	D3D_FEATURE_LEVEL       g_featureLevel;
-	ID3D11Device1* g_pd3dDevice1;
-	ID3D11DeviceContext1* g_pImmediateContext1;
-	IDXGISwapChain1* g_pSwapChain1;
-	ID3D11Texture2D* g_pDepthStencil;
+	ID3D11Device1* g_pd3dDevice1 = nullptr;
+	ID3D11DeviceContext1* g_pImmediateContext1 = nullptr;
+	IDXGISwapChain1* g_pSwapChain1 = nullptr;
+	ID3D11Texture2D* g_pDepthStencil = nullptr;
 };

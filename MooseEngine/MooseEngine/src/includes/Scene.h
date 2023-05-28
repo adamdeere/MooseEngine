@@ -1,5 +1,6 @@
 #pragma once
 #include "GraphicsDevice_DX.h"
+class Shader;
 //--------------------------------------------------------------------------------------
 // Structures
 //--------------------------------------------------------------------------------------
@@ -9,7 +10,6 @@ struct SimpleVertex
 	XMFLOAT4 Color;
 };
 
-
 struct ConstantBuffer
 {
 	XMMATRIX mWorld;
@@ -17,12 +17,10 @@ struct ConstantBuffer
 	XMMATRIX mProjection;
 };
 
-
 class Scene
 {
 public:
-	Scene();
-	Scene (GraphicsDevice_DX* const graphicsInstance);
+	Scene(GraphicsDevice_DX* const graphicsInstance);
 	~Scene();
 	HRESULT LoadScene(HWND const g_hWnd);
 	void UpdateScene();
@@ -30,17 +28,11 @@ public:
 private:
 
 	GraphicsDevice_DX* gm;
-
-	ID3D11VertexShader* g_pVertexShader = nullptr;
-	ID3D11PixelShader* g_pPixelShader = nullptr;
-	ID3D11InputLayout* g_pVertexLayout = nullptr;
+	Shader* shader;
 	ID3D11Buffer* g_pVertexBuffer = nullptr;
 	ID3D11Buffer* g_pIndexBuffer = nullptr;
 	ID3D11Buffer* g_pConstantBuffer = nullptr;
-	XMMATRIX                g_World;
-	XMMATRIX                g_View;
-	XMMATRIX                g_Projection;
-
-	HRESULT CompileShaderFromFile(const WCHAR* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut);
+	XMMATRIX                g_World = XMMatrixIdentity();
+	XMMATRIX                g_View = XMMatrixIdentity();
+	XMMATRIX                g_Projection = XMMatrixIdentity();
 };
-

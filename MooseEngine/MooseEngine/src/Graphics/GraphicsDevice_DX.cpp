@@ -1,8 +1,7 @@
 #include "pch.h"
 #include "GraphicsDevice_DX.h"
 
-GraphicsDevice_DX::GraphicsDevice_DX() :g_pd3dDevice(nullptr), g_pImmediateContext(nullptr), g_pSwapChain(nullptr), g_pRenderTargetView(nullptr), g_pDepthStencilView(nullptr), g_driverType(D3D_DRIVER_TYPE_NULL),
-g_featureLevel(D3D_FEATURE_LEVEL_11_0), g_pd3dDevice1(nullptr), g_pImmediateContext1(nullptr), g_pSwapChain1(nullptr), g_pDepthStencil(nullptr)
+GraphicsDevice_DX::GraphicsDevice_DX()
 {
 }
 
@@ -39,7 +38,7 @@ HRESULT GraphicsDevice_DX::InitilizeDrivers()
 	featureLevels.push_back(D3D_FEATURE_LEVEL_10_0);
 
 	const UINT numFeatureLevels = featureLevels.size();
-	//here builds 
+	//here builds
 	//problem starts here fixed problem by adding the libaries into the linker input directory
 	for (UINT driverTypeIndex = 0; driverTypeIndex < numDriverTypes; driverTypeIndex++)
 	{
