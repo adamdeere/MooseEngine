@@ -1,0 +1,9 @@
+{
+  "name": "mooseengine",
+  "version-string": "1.0",
+  "dependencies": [
+    "yaml-cpp",
+    "jsoncpp",
+    "assimp"
+  ]
+}

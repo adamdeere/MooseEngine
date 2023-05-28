@@ -23,14 +23,13 @@ HRESULT Scene::LoadScene(HWND const g_hWnd)
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 	};
-	UINT numElements = ARRAYSIZE(layout);
 
-	HRESULT hr;
+	HRESULT hr = S_OK;
 	ShaderProperties props;
 	props.szFileName = L"Shaders/Tutorial04.fx";
 	props.vsEntryPoint = "VS";
 	props.layout = layout;
-	props.numElements = numElements;
+	props.numElements = ARRAYSIZE(layout);
 	props.psEntryPoint = "PS";
 	props.vsShaderModel = "vs_4_0";
 	props.pzShaderModel = "ps_4_0";
@@ -63,10 +62,7 @@ HRESULT Scene::LoadScene(HWND const g_hWnd)
 	if (FAILED(hr))
 		return hr;
 
-	// Set vertex buffer
-	UINT stride = sizeof(SimpleVertex);
-	UINT offset = 0;
-	gm->getContext()->IASetVertexBuffers(0, 1, &g_pVertexBuffer, &stride, &offset);
+	
 
 	// Create index buffer
 	WORD indices[] =
@@ -99,11 +95,7 @@ HRESULT Scene::LoadScene(HWND const g_hWnd)
 	if (FAILED(hr))
 		return hr;
 
-	// Set index buffer
-	gm->getContext()->IASetIndexBuffer(g_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
-
-	// Set primitive topology
-	gm->getContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	
 
 	// Create the constant buffer
 	bd.Usage = D3D11_USAGE_DEFAULT;
@@ -173,7 +165,14 @@ void Scene::RenderScene()
 	//
 	shader->SetShaders();
 	gm->getContext()->VSSetConstantBuffers(0, 1, &g_pConstantBuffer);
-
+	// Set index buffer
+	gm->getContext()->IASetIndexBuffer(g_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+	// Set vertex buffer
+	UINT stride = sizeof(SimpleVertex);
+	UINT offset = 0;
+	gm->getContext()->IASetVertexBuffers(0, 1, &g_pVertexBuffer, &stride, &offset);
+	// Set primitive topology
+	gm->getContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	gm->getContext()->DrawIndexed(36, 0, 0);
 	//
 	// Present our back buffer to our front buffer
