@@ -40,10 +40,9 @@ LRESULT CALLBACK WndProc(const HWND hWnd, const UINT message, const WPARAM wPara
 	case WM_CHAR:
 		if (wParam == VK_ESCAPE)
 		{
-			Scene::OnKeyPress();
 			PostQuitMessage(0);
 		}
-			
+
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);

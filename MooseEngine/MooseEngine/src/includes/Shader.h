@@ -18,7 +18,7 @@ public:
 	Shader(GraphicsDevice_DX* graphics);
 	~Shader();
 
-	HRESULT InitShader(ShaderProperties* props);
+	HRESULT InitShader(ShaderProperties props);
 	void SetShaders();
 
 private:
@@ -28,4 +28,3 @@ private:
 	ID3D11InputLayout* g_pVertexLayout = nullptr;
 	HRESULT CompileShaderFromFile(const WCHAR* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut);
 };
-
