@@ -62,8 +62,6 @@ HRESULT Scene::LoadScene(HWND const g_hWnd)
 	if (FAILED(hr))
 		return hr;
 
-	
-
 	// Create index buffer
 	WORD indices[] =
 	{
@@ -94,8 +92,6 @@ HRESULT Scene::LoadScene(HWND const g_hWnd)
 	hr = gm->getDevice()->CreateBuffer(&bd, &InitData, &g_pIndexBuffer);
 	if (FAILED(hr))
 		return hr;
-
-	
 
 	// Create the constant buffer
 	bd.Usage = D3D11_USAGE_DEFAULT;

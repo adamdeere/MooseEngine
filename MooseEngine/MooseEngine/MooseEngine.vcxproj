@@ -147,16 +147,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="src\includes\Shader.h" />
     <ClInclude Include="src\includes\GraphicsDevice_DX.h" />
     <ClInclude Include="MooseEngine.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="src\includes\Scene.h" />
+    <ClInclude Include="src\includes\Buffers.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="src\includes\Window_DX.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="src\Utils\Shader.cpp" />
     <ClCompile Include="src\Graphics\GraphicsDevice_DX.cpp" />
     <ClCompile Include="MooseEngine.cpp" />

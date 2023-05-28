@@ -29,7 +29,7 @@ HRESULT GraphicsDevice_DX::InitilizeDrivers()
 	driverTypes.push_back(D3D_DRIVER_TYPE_WARP);
 	driverTypes.push_back(D3D_DRIVER_TYPE_REFERENCE);
 
-	const UINT numDriverTypes = driverTypes.size();
+	const size_t numDriverTypes = driverTypes.size();
 
 	std::vector<D3D_FEATURE_LEVEL> featureLevels;
 	featureLevels.push_back(D3D_FEATURE_LEVEL_11_1);
@@ -37,10 +37,10 @@ HRESULT GraphicsDevice_DX::InitilizeDrivers()
 	featureLevels.push_back(D3D_FEATURE_LEVEL_10_1);
 	featureLevels.push_back(D3D_FEATURE_LEVEL_10_0);
 
-	const UINT numFeatureLevels = featureLevels.size();
+	const size_t numFeatureLevels = featureLevels.size();
 	//here builds
 	//problem starts here fixed problem by adding the libaries into the linker input directory
-	for (UINT driverTypeIndex = 0; driverTypeIndex < numDriverTypes; driverTypeIndex++)
+	for (size_t driverTypeIndex = 0; driverTypeIndex < numDriverTypes; driverTypeIndex++)
 	{
 		g_driverType = driverTypes[driverTypeIndex];
 		hr = D3D11CreateDevice(nullptr, g_driverType, nullptr, createDeviceFlags, &featureLevels[driverTypeIndex], numFeatureLevels,

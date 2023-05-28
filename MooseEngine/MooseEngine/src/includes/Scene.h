@@ -10,6 +10,11 @@ struct SimpleVertex
 	XMFLOAT4 Color;
 };
 
+struct ColourVertex : public SimpleVertex
+{
+	XMFLOAT4 Color;
+};
+
 struct ConstantBuffer
 {
 	XMMATRIX mWorld;
