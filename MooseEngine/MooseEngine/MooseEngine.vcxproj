@@ -78,6 +78,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)MooseEngine;$(SolutionDir)MooseEngine\src\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -95,6 +96,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)MooseEngine;$(SolutionDir)MooseEngine\src\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -112,6 +114,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)MooseEngine;$(SolutionDir)MooseEngine\src\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -129,6 +132,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)MooseEngine;$(SolutionDir)MooseEngine\src\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -140,16 +144,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
-    <ClInclude Include="GraphicsDevice_DX.h" />
+    <ClInclude Include="src\includes\Shader.h" />
+    <ClInclude Include="src\includes\GraphicsDevice_DX.h" />
     <ClInclude Include="MooseEngine.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="Scene.h" />
+    <ClInclude Include="src\includes\Scene.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Window_DX.h" />
+    <ClInclude Include="src\includes\Window_DX.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GraphicsDevice_DX.cpp" />
+    <ClCompile Include="src\Utils\Shader.cpp" />
+    <ClCompile Include="src\Graphics\GraphicsDevice_DX.cpp" />
     <ClCompile Include="MooseEngine.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -157,8 +163,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="Window_DX.cpp" />
+    <ClCompile Include="src\Scene.cpp" />
+    <ClCompile Include="src\Graphics\Window_DX.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MooseEngine.rc" />
