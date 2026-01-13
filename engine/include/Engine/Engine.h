@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Engine/Window.h"
+#include "../Platform/Window.h"
 
 class Engine
 {

@@ -1,6 +1,6 @@
 add_library(MooseEngine STATIC
         src/Window.cpp
-        include/Engine/Window.h)
+        include/Platform/Window.h)
 
 # Tell CMake to find the packages
 find_package(glfw3 CONFIG REQUIRED)
