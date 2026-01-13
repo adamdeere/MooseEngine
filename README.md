@@ -1,3 +1,5 @@
+Set up for CLion
+
 ## 1. Clone the repository (including submodules)
 
 ```powershell
@@ -20,3 +22,7 @@ GLFW3 (window/input library)
 GLAD (OpenGL loader)
 
 Any required build tools (CMake, 7zip, PowerShell core, etc.)
+
+Set toolchain
+
+-DCMAKE_TOOLCHAIN_FILE=external/vcpkg/scripts/buildsystems/vcpkg.cmake
