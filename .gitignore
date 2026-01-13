@@ -1,50 +1,57 @@
-# ========================
-# CLion / JetBrains
-# ========================
+# =============================
+# Build output
+# =============================
+
+# CMake build folders
+/build/
+/cmake-build-*/
+
+# vcpkg generated folders (manifest mode)
+vcpkg_installed/
+external/vcpkg/buildtrees/
+external/vcpkg/downloads/
+
+# Optional: CMake cache and temporary files
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Testing/
+cmake_install.cmake
+Makefile
+
+# =============================
+# Visual Studio / CLion
+# =============================
+
+# Visual Studio temporary files
+*.VC.db
+*.VC.VC.opendb
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio binaries
+*.exe
+*.dll
+*.lib
+*.pdb
+
+# CLion caches and temporary files
 .idea/
 *.iml
 cmake-build-*/
-cmake-build-*-visual-studio/
-*.iws
-*.ipr
 
-# ========================
-# CMake / build artifacts
-# ========================
-CMakeFiles/
-CMakeCache.txt
-cmake_install.cmake
-Makefile
-*.obj
-*.o
-*.exe
-*.dll
-*.pdb
-*.lib
-*.exp
-*.idb
-*.ipdb
-*.sdf
-
-# ========================
-# vcpkg packages
-# ========================
-# Only keep the vcpkg repo itself, ignore installed binaries
-external/vcpkg/installed/
-external/vcpkg/buildtrees/
-external/vcpkg/packages/
-
-# ========================
-# Misc / OS
-# ========================
-*.log
-*.tmp
-*.swp
-*.DS_Store
+# =============================
+# OS generated files
+# =============================
+.DS_Store
 Thumbs.db
+desktop.ini
 
-# ========================
-# Optional: Sandbox runtime
-# ========================
-sandbox/*.exe
-sandbox/*.pdb
+# =============================
+# Optional: Editor temporary files
+# =============================
+*~
+*.swp
+*.lock
