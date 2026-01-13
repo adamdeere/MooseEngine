@@ -1,0 +1,10 @@
+{
+  "name": "mooseengine",
+  "version": "0.1.0",
+  "description": "MooseEngine — a modular render-agnostic C++ game engine",
+  "dependencies": [
+    "glfw3",
+    "glad"
+  ],
+  "builtin-baseline": "HEAD"
+}
