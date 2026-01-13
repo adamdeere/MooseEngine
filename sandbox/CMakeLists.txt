@@ -8,14 +8,10 @@ add_executable(MooseSandbox
         src/main.cpp
 )
 
-# Tell CMake to find the packages
-find_package(glfw3 CONFIG REQUIRED)
-find_package(glad CONFIG REQUIRED)
+
 
 # Link libraries
 target_link_libraries(MooseSandbox
         PRIVATE MooseEngine
-        PRIVATE glfw
-        PRIVATE glad::glad
 
 )

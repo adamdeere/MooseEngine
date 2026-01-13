@@ -1,4 +1,16 @@
-add_library(MooseEngine STATIC)
+add_library(MooseEngine STATIC
+        src/Window.cpp
+        include/Engine/Window.h)
+
+# Tell CMake to find the packages
+find_package(glfw3 CONFIG REQUIRED)
+find_package(glad CONFIG REQUIRED)
+
+target_link_libraries(MooseEngine
+        PUBLIC
+        glad::glad
+        glfw
+)
 
 target_sources(MooseEngine
     PRIVATE
