@@ -3,6 +3,7 @@
 
 Engine::Engine(const Config& windowConfig) {
     window = std::make_unique<Window>(windowConfig);
+    window->SetEventCallback([this](Event& e){ OnEvent(e); });
 }
 
 Engine::~Engine() = default;
@@ -26,6 +27,7 @@ void Engine::OnEvent(Event& e)
 
 
 void Engine::Run() const {
+
     if (initFunc) initFunc();
 
     double lastTime = glfwGetTime();

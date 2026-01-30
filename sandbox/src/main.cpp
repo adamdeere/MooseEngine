@@ -19,10 +19,64 @@ int main() {
     GLuint VAO, VBO;
 
     engine.SetInitFunction([&]() {
-        constexpr float vertices[] = {
-             0.0f,  0.5f, 0.0f,
-            -0.5f, -0.5f, 0.0f,
-             0.5f, -0.5f, 0.0f
+        // Cube data: 36 vertices (6 faces * 2 triangles * 3 vertices)
+        struct Vertex {
+        glm::vec3 Position;
+        glm::vec3 Normal;
+        glm::vec2 TexCoords;
+        glm::vec3 Tangent;
+        glm::vec3 Bitangent;
+    };
+
+        // Cube vertices
+        const Vertex cubeVertices[] = {
+    // Front face (+Z)
+    {{-0.5f, -0.5f, 0.5f}, {0,0,1}, {0,0}, {1,0,0}, {0,1,0}},
+    {{0.5f, -0.5f, 0.5f}, {0,0,1}, {1,0}, {1,0,0}, {0,1,0}},
+    {{0.5f, 0.5f, 0.5f}, {0,0,1}, {1,1}, {1,0,0}, {0,1,0}},
+    {{0.5f, 0.5f, 0.5f}, {0,0,1}, {1,1}, {1,0,0}, {0,1,0}},
+    {{-0.5f, 0.5f, 0.5f}, {0,0,1}, {0,1}, {1,0,0}, {0,1,0}},
+    {{-0.5f, -0.5f, 0.5f}, {0,0,1}, {0,0}, {1,0,0}, {0,1,0}},
+
+    // Back face (-Z)
+    {{0.5f, -0.5f, -0.5f}, {0,0,-1}, {0,0}, {-1,0,0}, {0,1,0}},
+    {{-0.5f, -0.5f, -0.5f}, {0,0,-1}, {1,0}, {-1,0,0}, {0,1,0}},
+    {{-0.5f, 0.5f, -0.5f}, {0,0,-1}, {1,1}, {-1,0,0}, {0,1,0}},
+    {{-0.5f, 0.5f, -0.5f}, {0,0,-1}, {1,1}, {-1,0,0}, {0,1,0}},
+    {{0.5f, 0.5f, -0.5f}, {0,0,-1}, {0,1}, {-1,0,0}, {0,1,0}},
+    {{0.5f, -0.5f, -0.5f}, {0,0,-1}, {0,0}, {-1,0,0}, {0,1,0}},
+
+    // Left face (-X)
+    {{-0.5f, -0.5f, -0.5f}, {-1,0,0}, {0,0}, {0,0,1}, {0,1,0}},
+    {{-0.5f, -0.5f, 0.5f}, {-1,0,0}, {1,0}, {0,0,1}, {0,1,0}},
+    {{-0.5f, 0.5f, 0.5f}, {-1,0,0}, {1,1}, {0,0,1}, {0,1,0}},
+    {{-0.5f, 0.5f, 0.5f}, {-1,0,0}, {1,1}, {0,0,1}, {0,1,0}},
+    {{-0.5f, 0.5f, -0.5f}, {-1,0,0}, {0,1}, {0,0,1}, {0,1,0}},
+    {{-0.5f, -0.5f, -0.5f}, {-1,0,0}, {0,0}, {0,0,1}, {0,1,0}},
+
+    // Right face (+X)
+    {{0.5f, -0.5f, 0.5f}, {1,0,0}, {0,0}, {0,0,-1}, {0,1,0}},
+    {{0.5f, -0.5f, -0.5f}, {1,0,0}, {1,0}, {0,0,-1}, {0,1,0}},
+    {{0.5f, 0.5f, -0.5f}, {1,0,0}, {1,1}, {0,0,-1}, {0,1,0}},
+    {{0.5f, 0.5f, -0.5f}, {1,0,0}, {1,1}, {0,0,-1}, {0,1,0}},
+    {{0.5f, 0.5f, 0.5f}, {1,0,0}, {0,1}, {0,0,-1}, {0,1,0}},
+    {{0.5f, -0.5f, 0.5f}, {1,0,0}, {0,0}, {0,0,-1}, {0,1,0}},
+
+    // Top face (+Y)
+    {{-0.5f, 0.5f, 0.5f}, {0,1,0}, {0,0}, {1,0,0}, {0,0,-1}},
+    {{0.5f, 0.5f, 0.5f}, {0,1,0}, {1,0}, {1,0,0}, {0,0,-1}},
+    {{0.5f, 0.5f, -0.5f}, {0,1,0}, {1,1}, {1,0,0}, {0,0,-1}},
+    {{0.5f, 0.5f, -0.5f}, {0,1,0}, {1,1}, {1,0,0}, {0,0,-1}},
+    {{-0.5f, 0.5f, -0.5f}, {0,1,0}, {0,1}, {1,0,0}, {0,0,-1}},
+    {{-0.5f, 0.5f, 0.5f}, {0,1,0}, {0,0}, {1,0,0}, {0,0,-1}},
+
+    // Bottom face (-Y)
+    {{-0.5f, -0.5f, -0.5f}, {0,-1,0}, {0,0}, {1,0,0}, {0,0,1}},
+    {{0.5f, -0.5f, -0.5f}, {0,-1,0}, {1,0}, {1,0,0}, {0,0,1}},
+    {{0.5f, -0.5f, 0.5f}, {0,-1,0}, {1,1}, {1,0,0}, {0,0,1}},
+    {{0.5f, -0.5f, 0.5f}, {0,-1,0}, {1,1}, {1,0,0}, {0,0,1}},
+    {{-0.5f, -0.5f, 0.5f}, {0,-1,0}, {0,1}, {1,0,0}, {0,0,1}},
+    {{-0.5f, -0.5f, -0.5f}, {0,-1,0}, {0,0}, {1,0,0}, {0,0,1}},
         };
 
         glGenVertexArrays(1, &VAO);
@@ -30,9 +84,30 @@ int main() {
 
         glBindVertexArray(VAO);
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), static_cast<void *>(nullptr));
+        glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), cubeVertices, GL_STATIC_DRAW);
+
+        // Position
         glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), static_cast<void *>(nullptr));
+
+        // Normal
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, Normal)));
+
+        // TexCoords
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, TexCoords)));
+
+        // Tangent
+        glEnableVertexAttribArray(3);
+        glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, Tangent)));
+
+        // Bitangent
+        glEnableVertexAttribArray(4);
+        glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, Bitangent)));
+
+        glBindVertexArray(0);
+
 
         shader = std::make_shared<OpenGLShader>(
             "Assets/Shaders/basic.vert",
