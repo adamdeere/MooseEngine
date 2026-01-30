@@ -1,20 +1,24 @@
 ﻿#pragma once
+#include <string>
+#include <GLFW/glfw3.h>
 
-struct GLFWwindow;
-
-class Window
-{
+class Window {
 public:
-    bool Create(int width, int height, const char* title);
-    void Destroy();
+    struct Config {
+        int width = 800;
+        int height = 600;
+        std::string title = "MooseEngine Window";
+    };
 
-    void PollEvents();
-    void SwapBuffers();
+    Window(const Config& config);
+    ~Window();
 
-    bool ShouldClose() const;
+    void swapBuffers();
+    void pollEvents();
+    bool shouldClose() const;
 
-    GLFWwindow* GetHandle() const { return m_Window; }
+    GLFWwindow* getNativeWindow() const { return window; }
 
 private:
-    GLFWwindow* m_Window = nullptr;
+    GLFWwindow* window;
 };

@@ -1,64 +1,43 @@
-﻿#include "../include/Platform/Window.h"
-
+﻿#include "Platform/Window.h"
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
 #include <iostream>
 
-bool Window::Create(int width, int height, const char* title)
-{
-    if (!glfwInit())
-    {
-        std::cerr << "Failed to initialise GLFW\n";
-        return false;
+Window::Window(const Config& config) {
+    if (!glfwInit()) {
+        std::cerr << "[Window] Failed to initialize GLFW\n";
+        window = nullptr;
+        return;
     }
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-    m_Window = glfwCreateWindow(width, height, title, nullptr, nullptr);
-    if (!m_Window)
-    {
-        std::cerr << "Failed to create GLFW window\n";
+    window = glfwCreateWindow(config.width, config.height, config.title.c_str(), nullptr, nullptr);
+    if (!window) {
+        std::cerr << "[Window] Failed to create GLFW window\n";
         glfwTerminate();
-        return false;
+        return;
     }
 
-    glfwMakeContextCurrent(m_Window);
+    glfwMakeContextCurrent(window);
 
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cerr << "Failed to initialise GLAD\n";
-        return false;
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        std::cerr << "[Window] Failed to initialize GLAD\n";
     }
 
-    glfwSwapInterval(1); // vsync
-
-    return true;
+    glEnable(GL_DEPTH_TEST); // basic 3D rendering
 }
 
-void Window::Destroy()
-{
-    if (m_Window)
-    {
-        glfwDestroyWindow(m_Window);
-        m_Window = nullptr;
-    }
-
+Window::~Window() {
+    if (window) glfwDestroyWindow(window);
     glfwTerminate();
 }
 
-void Window::PollEvents()
-{
+void Window::swapBuffers() {
+    if (window) glfwSwapBuffers(window);
+}
+
+void Window::pollEvents() {
     glfwPollEvents();
 }
 
-void Window::SwapBuffers()
-{
-    glfwSwapBuffers(m_Window);
-}
-
-bool Window::ShouldClose() const
-{
-    return glfwWindowShouldClose(m_Window);
+bool Window::shouldClose() const {
+    return window ? glfwWindowShouldClose(window) : true;
 }

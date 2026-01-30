@@ -4,7 +4,8 @@
   "description": "MooseEngine — a modular render-agnostic C++ game engine",
   "dependencies": [
     "glfw3",
-    "glad"
+    "glad",
+    "glm"
   ],
   "builtin-baseline": "58bb6778689746b6a48c2ee4a2dfdb0b70f681df"
 }

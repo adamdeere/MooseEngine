@@ -1,20 +1,23 @@
 ﻿#pragma once
+#include "Platform/Window.h"
+#include <functional>
+#include <memory>
 
-#include "../Platform/Window.h"
-
-class Engine
-{
+class Engine {
 public:
-    bool Initialise();
-    void Run();
-    void Shutdown();
+    using InitFunc = std::function<void()>;
+    using UpdateFunc = std::function<void(float dt)>;
+
+    Engine(const Window::Config& windowConfig);
+    ~Engine();
+
+    void setInitFunction(InitFunc func) { initFunc = func; }
+    void setUpdateFunction(UpdateFunc func) { updateFunc = func; }
+
+    void run() const;
 
 private:
-    void FixedUpdate(double dt);
-    void Update(double dt);
-    void RenderPrep();
-    void Render();
-
-private:
-    Window m_Window;
+    InitFunc initFunc;
+    UpdateFunc updateFunc;
+    std::unique_ptr<Window> window;
 };
