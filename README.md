@@ -11,9 +11,7 @@ git submodule update --init --recursive
 cd external/vcpkg
 .\bootstrap-vcpkg.bat
 
-cd ../../
-
-.\external\vcpkg\vcpkg.exe install
+vcpkg.exe install
 
 vcpkg will automatically download and build:
 
