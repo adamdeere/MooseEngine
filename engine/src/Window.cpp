@@ -18,9 +18,12 @@ Window::Window(const Config& config) {
 
     glfwMakeContextCurrent(window);
 
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+    if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
         std::cerr << "[Window] Failed to initialize GLAD\n";
     }
+
+    // ✅ Set initial viewport
+    glViewport(0, 0, config.width, config.height);
 
     glEnable(GL_DEPTH_TEST); // basic 3D rendering
 }
@@ -30,7 +33,7 @@ Window::~Window() {
     glfwTerminate();
 }
 
-void Window::swapBuffers() {
+void Window::swapBuffers() const {
     if (window) glfwSwapBuffers(window);
 }
 

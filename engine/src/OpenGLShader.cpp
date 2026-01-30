@@ -1,7 +1,7 @@
 ﻿//
 // Created by Adam on 30/01/2026.
 //
-
+#include <filesystem>
 #include "Render/OpenGLShader.h"
 #include <glad/glad.h>
 #include <fstream>
@@ -12,6 +12,8 @@
 // Constructor
 // -----------------------------
 OpenGLShader::OpenGLShader(const std::string& vertexPath, const std::string& fragmentPath) {
+
+
     std::string vertexSrc = readFile(vertexPath);
     std::string fragmentSrc = readFile(fragmentPath);
 
@@ -69,7 +71,7 @@ void OpenGLShader::setMat4(const std::string& name, const glm::mat4& value) {
 // Helpers
 // -----------------------------
 std::string OpenGLShader::readFile(const std::string& path) {
-    std::ifstream file(path, std::ios::in | std::ios::binary);
+    const std::ifstream file(path, std::ios::in | std::ios::binary);
     if (!file) {
         std::cerr << "[OpenGLShader] Failed to open file: " << path << std::endl;
         return "";

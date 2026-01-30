@@ -13,7 +13,7 @@ int main() {
     Engine engine(winConfig);
 
     std::shared_ptr<OpenGLShader> shader;
-    Camera camera(45.0f, 800.0f/600.0f, 0.1f, 100.0f);
+    Camera camera(45.0f, static_cast<float>(winConfig.width) / static_cast<float>(winConfig.height), 0.1f, 100.0f);
     GLuint VAO, VBO;
 
     engine.setInitFunction([&]() {

@@ -10,11 +10,12 @@ public:
         std::string title = "MooseEngine Window";
     };
 
-    Window(const Config& config);
+    explicit Window(const Config& config);
     ~Window();
 
-    void swapBuffers();
-    void pollEvents();
+    void swapBuffers() const;
+
+    static void pollEvents();
     bool shouldClose() const;
 
     GLFWwindow* getNativeWindow() const { return window; }
