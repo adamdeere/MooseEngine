@@ -3,21 +3,36 @@
 #include <functional>
 #include <memory>
 
+#include "Camera.h"
+
+struct Config;
+
 class Engine {
 public:
-    using InitFunc = std::function<void()>;
-    using UpdateFunc = std::function<void(float dt)>;
+    using InitFunction = std::function<void()>;
+    using RenderFunction = std::function<void()>;
+    using UpdateFunction = std::function<void(float dt)>;
+    using FixedUpdateFunction = std::function<void(float dt)>;
 
-    Engine(const Window::Config& windowConfig);
+    explicit Engine(const Config& windowConfig);
     ~Engine();
 
-    void setInitFunction(InitFunc func) { initFunc = func; }
-    void setUpdateFunction(UpdateFunc func) { updateFunc = func; }
+    void SetInitFunction(const InitFunction &func) { initFunc = func; }
+    void SetRenderFunction(const RenderFunction &func) { renderFunc = func; }
+    void SetUpdateFunction(const UpdateFunction &func) { updateFunc = func; }
+    void SetFixedFunction(const FixedUpdateFunction &func) { fixedUpdateFunc = func; }
 
-    void run() const;
+    void OnEvent(Event& e);
+
+
+    void Run() const;
 
 private:
-    InitFunc initFunc;
-    UpdateFunc updateFunc;
+    InitFunction initFunc;
+    RenderFunction renderFunc;
+    UpdateFunction updateFunc;
+    FixedUpdateFunction fixedUpdateFunc;
     std::unique_ptr<Window> window;
+
+    Camera camera; // ✅ Engine owns a default camera
 };

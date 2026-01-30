@@ -1,25 +1,58 @@
 ﻿#include "Engine/Engine.h"
-#include <iostream>
+#include "Platform/Config.h"
 
-Engine::Engine(const Window::Config& windowConfig) {
+Engine::Engine(const Config& windowConfig) {
     window = std::make_unique<Window>(windowConfig);
 }
 
 Engine::~Engine() = default;
 
-void Engine::run() const {
-    if (initFunc) initFunc();
+void Engine::OnEvent(Event& e)
+{
+    if (e.GetType() == EventType::WindowResize)
+    {
+        const auto& resize = static_cast<WindowResizeEvent&>(e);
 
-    auto lastTime = static_cast<float>(glfwGetTime());
+        // Engine camera reacts automatically
+        camera.SetAspectRatio(
+            static_cast<float>(resize.width) /
+            static_cast<float>(resize.height)
+        );
 
-    while (!window->shouldClose()) {
-        const auto currentTime = static_cast<float>(glfwGetTime());
-        const float dt = currentTime - lastTime;
-        lastTime = currentTime;
-
-        if (updateFunc) updateFunc(dt);
-
-        window->swapBuffers();
-        window->pollEvents();
+        // OpenGL viewport
+        glViewport(0, 0, resize.width, resize.height);
     }
 }
+
+
+void Engine::Run() const {
+    if (initFunc) initFunc();
+
+    double lastTime = glfwGetTime();
+    constexpr double fixedTimeStep = 1.0 / 60.0;
+    double accumulator = 0.0;
+
+    while (!window->ShouldClose()) {
+        window->PollEvents();
+
+        const double currentTime = glfwGetTime();
+        const double frameTime = currentTime - lastTime;
+        lastTime = currentTime;
+
+        accumulator += frameTime;
+
+        // FixedUpdate (physics)
+        while (accumulator >= fixedTimeStep) {
+            if (fixedUpdateFunc) fixedUpdateFunc(fixedTimeStep);
+            accumulator -= fixedTimeStep;
+        }
+
+        // Variable Update (input, animations, camera)
+        if (updateFunc) updateFunc(static_cast<float>(frameTime));
+
+        // Render
+        if (renderFunc) renderFunc();
+        window->SwapBuffers();
+    }
+}
+

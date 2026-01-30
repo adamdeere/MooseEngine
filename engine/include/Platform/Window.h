@@ -1,25 +1,36 @@
 ﻿#pragma once
-#include <string>
-#include <GLFW/glfw3.h>
 
-class Window {
+#include <functional>
+#include "WindowEvents.h"
+struct Config;
+
+class Window
+{
 public:
-    struct Config {
-        int width = 800;
-        int height = 600;
-        std::string title = "MooseEngine Window";
-    };
+    using EventCallbackFn = std::function<void(Event&)>;
 
     explicit Window(const Config& config);
     ~Window();
 
-    void swapBuffers() const;
+    static void PollEvents();
+    void SwapBuffers() const;
 
-    static void pollEvents();
-    bool shouldClose() const;
+    // NEW
+    bool ShouldClose() const;
 
-    GLFWwindow* getNativeWindow() const { return window; }
+    void SetEventCallback(const EventCallbackFn& callback)
+    {
+        m_EventCallback = callback;
+    }
 
 private:
-    GLFWwindow* window;
+    static void FramebufferResizeCallback(
+        GLFWwindow* window,
+        int width,
+        int height
+    );
+
+private:
+    GLFWwindow* m_Window = nullptr;
+    EventCallbackFn m_EventCallback;
 };

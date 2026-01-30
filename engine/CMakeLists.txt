@@ -6,7 +6,11 @@ add_library(MooseEngine STATIC
             include/Render/OpenGLShader.h
             src/OpenGLShader.cpp
             src/Camera.cpp
-            include/Engine/Camera.h)
+            include/Engine/Camera.h
+        include/Platform/Events.h
+        src/WindowEvents.cpp
+        include/Platform/WindowEvents.h
+        include/Platform/Config.h)
 
 # Tell CMake to find the packages
 find_package(glfw3 CONFIG REQUIRED)
